@@ -12,6 +12,7 @@ Tindev as the name suggests it is a Tinder-like for Developers, a fullstack web 
 ### Installation
 In your project folder 
 > cd tindev-backend && yarn install && yarn dev
+
 > cd tindev-frontend && yarn install && yarn start
 > 
 It will open a new tab in your browser on localhost:3000
