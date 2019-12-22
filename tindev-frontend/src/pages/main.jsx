@@ -13,6 +13,8 @@ import itsamatch from '../assets/itsamatch.png';
 export default function Main({ match }) {
   const [users, setUsers] = useState([]);
   const [matchDev, setMatchDev] = useState(null);
+  const [isLiked, setIsLiked] = useState({ active: null, id: 0 });
+  const [isDisliked, setIsDisliked] = useState({ active: null, id: 0 });
 
   useEffect(() => {
     async function loadUsers() {
@@ -34,17 +36,25 @@ export default function Main({ match }) {
     });
   }, [match.params.id]);
 
+  const removeUser = id => {
+    setTimeout(() => {
+      setUsers(users.filter(user => user._id !== id));
+    }, 1000);
+  };
+
   const handleLike = async id => {
+    await setIsLiked({ active: true, id });
     await api.post(`/devs/${id}/likes`, null, {
       headers: { user_id: match.params.id }
     });
-    setUsers(users.filter(user => user._id !== id));
+    removeUser(id);
   };
   const handleDislike = async id => {
+    await setIsDisliked({ active: true, id });
     await api.post(`/devs/${id}/dislikes`, null, {
       headers: { user_id: match.params.id }
     });
-    setUsers(users.filter(user => user._id !== id));
+    removeUser(id);
   };
 
   return (
@@ -56,7 +66,15 @@ export default function Main({ match }) {
       {users.length ? (
         <ul>
           {users.map(user => (
-            <li key={user._id}>
+            <li
+              key={user._id}
+              className={[
+                isLiked.active && isLiked.id === user._id ? 'liked' : '',
+                isDisliked.active && isDisliked.id === user._id
+                  ? 'disliked'
+                  : ''
+              ].join(' ')}
+            >
               <img src={user.avatar} alt={user.avatar} />
 
               <footer>
