@@ -17,7 +17,7 @@ export default function Main({ match }) {
   useEffect(() => {
     async function loadUsers() {
       const res = await api.get('/devs', {
-        headers: { user: match.params.id }
+        headers: { user_id: match.params.id }
       });
       setUsers(res.data);
     }
@@ -36,21 +36,21 @@ export default function Main({ match }) {
 
   const handleLike = async id => {
     await api.post(`/devs/${id}/likes`, null, {
-      headers: { user: match.params.id }
+      headers: { user_id: match.params.id }
     });
     setUsers(users.filter(user => user._id !== id));
   };
   const handleDislike = async id => {
     await api.post(`/devs/${id}/dislikes`, null, {
-      headers: { user: match.params.id }
+      headers: { user_id: match.params.id }
     });
     setUsers(users.filter(user => user._id !== id));
   };
 
   return (
-    <div className="main-container">
-      <Link to="/">
-        <img src={logo} alt="Tindev" />
+    <div className='main-container'>
+      <Link to='/'>
+        <img src={logo} alt='Tindev' />
       </Link>
 
       {users.length ? (
@@ -64,33 +64,33 @@ export default function Main({ match }) {
                 <p>{user.bio}</p>
               </footer>
 
-              <div className="buttons">
+              <div className='buttons'>
                 <button onClick={() => handleDislike(user._id)}>
-                  <img src={dislike} alt="Dislike dev" />
+                  <img src={dislike} alt='Dislike dev' />
                 </button>
                 <button onClick={() => handleLike(user._id)}>
-                  <img src={like} alt="Like" />
+                  <img src={like} alt='Like' />
                 </button>
               </div>
             </li>
           ))}
         </ul>
       ) : (
-        <div className="empty">
+        <div className='empty'>
           Acabou{' '}
-          <span role="img" aria-label="sad">
+          <span role='img' aria-label='sad'>
             😥
           </span>
         </div>
       )}
 
       {matchDev && (
-        <div className="match-container">
+        <div className='match-container'>
           <img src={itsamatch} alt="It's a match" />
-          <img className="avatar" src={matchDev.avatar} alt={matchDev.name} />
+          <img className='avatar' src={matchDev.avatar} alt={matchDev.name} />
           <strong>{matchDev.name}</strong>
           <p>{matchDev.bio}</p>
-          <button type="button" onClick={() => setMatchDev(null)}>
+          <button type='button' onClick={() => setMatchDev(null)}>
             FECHAR
           </button>
         </div>
