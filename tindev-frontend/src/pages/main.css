@@ -11,6 +11,8 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30px;
   margin-top: 50px;
+  padding-right: 40px;
+  padding-left: 40px;
 }
 
 .main-container ul li {
@@ -111,4 +113,19 @@
   font-size: 18px;
   margin-top: 30px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 375px) {
+  .main-container ul {
+    grid-template-columns: 1fr;
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@media screen and (min-width: 420px) and (max-width: 767px) {
+  .main-container ul {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 20px;
+  }
 }
