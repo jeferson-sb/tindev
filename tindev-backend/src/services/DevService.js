@@ -1,30 +1,39 @@
-const Dev = require("../models/Dev");
+const Dev = require('../models/Dev');
 
 class DevService {
-  async index(user) {
-    const loggedDev = await Dev.findById(user);
-    const users = await Dev.find({
-      $and: [
-        { _id: { $ne: user } },
-        { _id: { $nin: loggedDev.likes } },
-        { _id: { $nin: loggedDev.dislikes } }
-      ]
-    });
-    return { users };
+  static async index(userID) {
+    try {
+      if (userID) {
+        const loggedDev = await Dev.findById(userID);
+        const users = await Dev.find({
+          $and: [
+            { _id: { $ne: userID } },
+            { _id: { $nin: loggedDev.likes } },
+            { _id: { $nin: loggedDev.dislikes } }
+          ]
+        });
+        return users;
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-  async get(user) {
-    const user = await Dev.findOne({ user: username });
-    return { user };
+  static async get(username) {
+    try {
+      const user = await Dev.findOne({ username });
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-  async store({ name, username, bio, avatar }) {
-    const user = await Dev.create({
-      name,
-      user: username,
-      bio,
-      avatar
-    });
-    return { user };
+  static async store(userObj) {
+    try {
+      const user = await Dev.create(userObj);
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }
 
-module.exports.DevService = DevService;
+module.exports = DevService;
