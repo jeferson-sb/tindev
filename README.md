@@ -23,8 +23,11 @@ In your project folder
 ### Mobile Configuration
 
 > npm install -g react-native-cli
+
 > adb reverse tcp:3001 tcp:3001
+
 > cd tindev-mobile
+
 > react-native run-android // or react-native run-ios
 
 For more information see [the official documentation for setting up a react-native project](https://facebook.github.io/react-native/docs/getting-started.html)
