@@ -9,6 +9,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Card from '../components/Card';
+
 import api from '../services/api';
 
 import logo from '../assets/logo.png';
@@ -20,11 +22,12 @@ export default function Main({ navigation }) {
   const id = navigation.getParam('user');
   const [users, setUsers] = useState([]);
   const [matchDev, setMatchDev] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     async function loadUsers() {
       const res = await api.get('/devs', {
-        headers: { user: id }
+        headers: { user_id: id }
       });
       setUsers(res.data);
     }
@@ -45,16 +48,18 @@ export default function Main({ navigation }) {
     const [user, ...rest] = users;
 
     await api.post(`/devs/${user._id}/likes`, null, {
-      headers: { user: id }
+      headers: { user_id: id }
     });
+    setCurrentIndex(currentIndex + 1);
     setUsers(rest);
   };
   const handleDislike = async () => {
     const [user, ...rest] = users;
 
     await api.post(`/devs/${user._id}/dislikes`, null, {
-      headers: { user: id }
+      headers: { user_id: id }
     });
+    setCurrentIndex(currentIndex + 1);
     setUsers(rest);
   };
 
@@ -73,21 +78,20 @@ export default function Main({ navigation }) {
         {users.length === 0 ? (
           <Text style={styles.empty}>Acabou :( </Text>
         ) : (
-          users.map((user, index) => (
-            <View
-              key={user._id}
-              style={[styles.card, { zIndex: users.length - index }]}
-            >
-              <Image style={styles.avatar} source={{ uri: user.avatar }} />
-              <View style={styles.footer}>
-                <Text style={styles.name}> {user.name}</Text>
-                <Text style={styles.bio} numberOfLines={3}>
-                  {' '}
-                  {user.bio}
-                </Text>
-              </View>
-            </View>
-          ))
+          users
+            .map((user, index) => (
+              <Card
+                key={index}
+                {...user}
+                users={users}
+                i={index}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+                handleLike={handleLike}
+                handleDislike={handleDislike}
+              />
+            ))
+            .reverse()
         )}
       </View>
 
@@ -133,41 +137,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     maxHeight: 500
   },
-  card: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    margin: 30,
-    overflow: 'hidden',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  },
-  avatar: {
-    flex: 1,
-    height: 300
-  },
-  footer: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 15
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333'
-  },
-  bio: {
-    fontSize: 14,
-    color: '#999',
-    marginTop: 5,
-    lineHeight: 18
-  },
   buttonsContainer: {
     flexDirection: 'row',
-    marginBottom: 30
+    marginBottom: 60
   },
   button: {
     width: 50,

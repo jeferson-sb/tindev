@@ -34,4 +34,4 @@ For more information see [the official documentation for setting up a react-nati
 
 ## Version
 
-1.0.2
+1.0.3

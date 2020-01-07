@@ -1,14 +1,14 @@
 {
   "name": "tindev-backend",
-  "version": "1.2.1",
-  "description": "",
+  "version": "1.2.2",
+  "description": "Tinder for developers",
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jeferson",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",

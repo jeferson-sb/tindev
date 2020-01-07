@@ -14,13 +14,17 @@ const store = async (req, res) => {
   if (userExists) {
     return res.json(userExists);
   } else {
-    const response = await axios.get(
-      `https://api.github.com/users/${username}`
-    );
-    const { name, bio, avatar_url: avatar } = response.data;
-    const dev = await DevService.store({ name, username, bio, avatar });
+    try {
+      const response = await axios.get(
+        `https://api.github.com/users/${username}`
+      );
+      const { name, bio, avatar_url: avatar } = response.data;
+      const dev = await DevService.store({ name, username, bio, avatar });
 
-    return res.json(dev);
+      return res.json(dev);
+    } catch (error) {
+      return res.json({ error: 'Github user not found!' });
+    }
   }
 };
 

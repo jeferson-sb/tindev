@@ -1,7 +1,16 @@
-import axios from 'axios'
+import axios from 'axios';
+
+let apiURL;
+if (process.env.NODE_ENV === 'development') {
+  apiURL = 'http://localhost:3000';
+}
+
+if (process.env.NODE_ENV === 'production') {
+  apiURL = 'https://tindev-app.herokuapp.com';
+}
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001'
-})
+  baseURL: apiURL
+});
 
-export default api
+export default api;
