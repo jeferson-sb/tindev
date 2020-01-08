@@ -37,8 +37,8 @@ export default function Card({
             Animated.spring(position, {
               toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy }
             }).start(() => {
-              handleLike();
               setCurrentIndex(currentIndex + 1);
+              handleLike();
               position.setValue({ x: 0, y: 0 });
             });
           } else if (gestureState.dx < -120) {

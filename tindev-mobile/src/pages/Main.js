@@ -50,7 +50,6 @@ export default function Main({ navigation }) {
     await api.post(`/devs/${user._id}/likes`, null, {
       headers: { user_id: id }
     });
-    setCurrentIndex(currentIndex + 1);
     setUsers(rest);
   };
   const handleDislike = async () => {
@@ -59,7 +58,6 @@ export default function Main({ navigation }) {
     await api.post(`/devs/${user._id}/dislikes`, null, {
       headers: { user_id: id }
     });
-    setCurrentIndex(currentIndex + 1);
     setUsers(rest);
   };
 

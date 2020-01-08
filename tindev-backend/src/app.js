@@ -37,5 +37,7 @@ app.use(routes);
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 server.listen(config.port, () =>
-  console.log(`Server is up and running on port ${config.port}`)
+  console.log(
+    `Server is up and running on ${process.env.NODE_ENV} mode at port ${config.port}`
+  )
 );
