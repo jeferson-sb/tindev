@@ -1,4 +1,11 @@
-# Tindev
+<div align="center">
+
+<img src=".github/logo.png">
+<br />
+
+![](https://img.shields.io/badge/omnistack-8.0-blueviolet?style=flat-square)
+
+</div>
 
 ## 💡 Project
 
@@ -53,6 +60,11 @@ $ yarn dev
 $ cd tindev-frontend
 $ yarn start
 ```
+
+## ✔ To-Do
+
+- [ ] Release app 1.0.0
+- [ ] Slide right and Slide left feature
 
 ## 📝 License
 

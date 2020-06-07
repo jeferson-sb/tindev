@@ -119,11 +119,7 @@ function Main({ match }) {
 }
 
 Main.propTypes = {
-  match: PropTypes.shape({
-    params: {
-      id: PropTypes.string,
-    },
-  }),
+  match: PropTypes.object,
 };
 
 export default Main;
