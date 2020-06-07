@@ -139,7 +139,7 @@
   width: 80%;
   height: 80%;
   position: absolute;
-  background-image: url('../assets/like.svg');
+  background-image: url('../../assets/like.svg');
   background-size: contain;
   background-repeat: no-repeat;
   animation: fade 1s 0.6s ease-in-out normal forwards;
@@ -163,7 +163,7 @@
   width: 80%;
   height: 80%;
   position: absolute;
-  background-image: url('../assets/dislike.svg');
+  background-image: url('../../assets/dislike.svg');
   background-size: contain;
   background-repeat: no-repeat;
   animation: fade 1s 0.6s ease-in-out normal forwards;

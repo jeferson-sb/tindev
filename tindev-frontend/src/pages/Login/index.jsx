@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import api from '../../services/api';
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import './styles.css';
 
 export default function Login() {
