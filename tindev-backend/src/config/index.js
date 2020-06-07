@@ -13,5 +13,6 @@ if (process.env.NODE_ENV === 'development') {
 
 module.exports = {
   port: process.env.PORT,
-  databaseUrl
+  databaseUrl,
+  mode: process.env.NODE_ENV,
 };
