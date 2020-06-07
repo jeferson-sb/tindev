@@ -45,14 +45,14 @@ function Main({ match }) {
 
   const handleLike = async (id) => {
     await setIsLiked({ active: true, id });
-    await api.post(`/devs/${id}/likes`, null, {
+    await api.post(`/api/devs/${id}/likes`, null, {
       headers: { user_id: match.params.id },
     });
     removeUser(id);
   };
   const handleDislike = async (id) => {
     await setIsDisliked({ active: true, id });
-    await api.post(`/devs/${id}/dislikes`, null, {
+    await api.post(`/api/devs/${id}/dislikes`, null, {
       headers: { user_id: match.params.id },
     });
     removeUser(id);
