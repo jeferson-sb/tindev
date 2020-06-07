@@ -1,37 +1,61 @@
-# Tindev - FullStack Web & Mobile App
+# Tindev
+
+## 💡 Project
 
 Tindev as the name suggests it is a Tinder-like for Developers, a fullstack web and mobile application built using top technologies like **React**, as the front-end, **Node.js**, back-end with MongoDB, and **React-native** for our mobile app.
 
-## Quick Start
+## 💻 Demo
+
+[https://tindev-app.herokuapp.com](https://tindev-app.herokuapp.com/)
+
+### 📱 App
+
+Soon...
+
+## 🚀 Quick start
 
 ### Pre-requisites
 
-- Node.js version 8.0 or greater
+- Node.js version 10.0 or greater
 - Download & Install [MongoDB](https://www.mongodb.com/download-center)
 - Download & Install [Mongo Compass](https://www.mongodb.com/products/compass)
+- React Native: [See the environtment setup to react native](https://reactnative.dev/docs/environment-setup)
 
 ### Installation
 
-In your project folder
+```bash
+$ cd tindev-backend
+$ yarn
+```
 
-> cd tindev-backend && yarn install && yarn dev
+```bash
+$ cd .. && cd tindev-frontend
+$ yarn
+```
 
-> cd tindev-frontend && yarn install && yarn start
->
-> It will open a new tab in your browser on localhost:3000
+```bash
+$ cd .. && cd tindev-mobile
+$ yarn
+```
 
-### Mobile Configuration
+### Usage
 
-> npm install -g react-native-cli
+> Rename `.env.example` to `.env` on backend
 
-> adb reverse tcp:3001 tcp:3001
+```bash
+$ cd tindev-backend
+$ yarn dev
+```
 
-> cd tindev-mobile
+> Open another terminal and run
 
-> react-native run-android // or react-native run-ios
+```bash
+$ cd tindev-frontend
+$ yarn start
+```
 
-For more information see [the official documentation for setting up a react-native project](https://facebook.github.io/react-native/docs/getting-started.html)
+## 📝 License
 
-## Version
+This project is licensed under the terms of the [MIT](https://github.com/jeferson-sb/tindev/blob/master/LICENSE) license
 
-1.0.3
+`Made with ♥ by Jeferson © 2020`
