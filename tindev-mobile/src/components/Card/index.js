@@ -3,13 +3,12 @@ import {
   View,
   Image,
   Text,
-  StyleSheet,
   Dimensions,
   Animated,
-  PanResponder
+  PanResponder,
 } from 'react-native';
 
-const SCREEN_HEIGHT = Dimensions.get('window').height;
+import styles from './styles';
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Card({
@@ -22,7 +21,7 @@ export default function Card({
   currentIndex,
   setCurrentIndex,
   handleLike,
-  handleDislike
+  handleDislike,
 }) {
   const position = new Animated.ValueXY();
   const panResponder = useMemo(
@@ -35,7 +34,7 @@ export default function Card({
         onPanResponderRelease: (evt, gestureState) => {
           if (gestureState.dx > 120) {
             Animated.spring(position, {
-              toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy }
+              toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy },
             }).start(() => {
               setCurrentIndex(currentIndex + 1);
               handleLike();
@@ -43,7 +42,7 @@ export default function Card({
             });
           } else if (gestureState.dx < -120) {
             Animated.spring(position, {
-              toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy }
+              toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy },
             }).start(() => {
               setCurrentIndex(currentIndex + 1);
               handleDislike();
@@ -52,35 +51,35 @@ export default function Card({
           } else {
             Animated.spring(position, {
               toValue: { x: 0, y: 0 },
-              friction: 4
+              friction: 4,
             }).start();
           }
-        }
+        },
       }),
-    [currentIndex]
+    [currentIndex, handleLike, handleDislike, position, setCurrentIndex],
   );
   const rotate = position.x.interpolate({
     inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
     outputRange: ['-10deg', '0deg', '10deg'],
-    extrapolate: 'clamp'
+    extrapolate: 'clamp',
   });
   const rotateAndTranslate = {
     transform: [
       {
-        rotate
+        rotate,
       },
-      ...position.getTranslateTransform()
-    ]
+      ...position.getTranslateTransform(),
+    ],
   };
   const likeOpacity = position.x.interpolate({
     inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
     outputRange: [0, 0, 1],
-    extrapolate: 'clamp'
+    extrapolate: 'clamp',
   });
   const nopeOpacity = position.x.interpolate({
     inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
     outputRange: [1, 0, 0],
-    extrapolate: 'clamp'
+    extrapolate: 'clamp',
   });
 
   if (parseInt(i) < parseInt(currentIndex)) {
@@ -90,18 +89,16 @@ export default function Card({
       <Animated.View
         {...panResponder.panHandlers}
         key={_id}
-        style={[rotateAndTranslate, styles.animatedCard]}
-      >
+        style={[rotateAndTranslate, styles.animatedCard]}>
         <Animated.View
           style={[
             styles.action,
             {
               opacity: likeOpacity,
               left: 40,
-              transform: [{ rotate: '-30deg' }]
-            }
-          ]}
-        >
+              transform: [{ rotate: '-30deg' }],
+            },
+          ]}>
           <Text style={styles.likeText}>LIKE</Text>
         </Animated.View>
         <Animated.View
@@ -110,10 +107,9 @@ export default function Card({
             {
               opacity: nopeOpacity,
               right: 40,
-              transform: [{ rotate: '30deg' }]
-            }
-          ]}
-        >
+              transform: [{ rotate: '30deg' }],
+            },
+          ]}>
           <Text style={styles.nopeText}>NOPE</Text>
         </Animated.View>
 
@@ -135,9 +131,8 @@ export default function Card({
         key={_id}
         style={[
           styles.nextCard,
-          { transform: position.getTranslateTransform() }
-        ]}
-      >
+          { transform: position.getTranslateTransform() },
+        ]}>
         <View key={_id} style={[styles.card, { zIndex: users.length - i }]}>
           <Image style={styles.avatar} source={{ uri: avatar }} />
           <View style={styles.footer}>
@@ -152,77 +147,3 @@ export default function Card({
     );
   }
 }
-
-const styles = StyleSheet.create({
-  card: {
-    borderWidth: 2,
-    borderColor: '#e9e9e9',
-    borderRadius: 20,
-    margin: 30,
-    overflow: 'hidden',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: '#f4f4f4'
-  },
-  animatedCard: {
-    height: SCREEN_HEIGHT - 120,
-    width: SCREEN_WIDTH,
-    padding: 10,
-    position: 'absolute'
-  },
-  nextCard: {
-    height: SCREEN_HEIGHT - 120,
-    width: SCREEN_WIDTH,
-    padding: 10,
-    position: 'absolute'
-  },
-  avatar: {
-    flex: 1,
-    height: 300,
-    resizeMode: 'cover'
-  },
-  footer: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 20,
-    paddingVertical: 15
-  },
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333'
-  },
-  bio: {
-    fontSize: 14,
-    color: '#999',
-    marginTop: 5,
-    lineHeight: 18
-  },
-  action: {
-    position: 'absolute',
-    top: 50,
-    zIndex: 1000
-  },
-  likeText: {
-    borderWidth: 2,
-    borderColor: 'green',
-    color: 'green',
-    fontSize: 32,
-    fontWeight: '900',
-    padding: 10,
-    paddingHorizontal: 30,
-    letterSpacing: 2
-  },
-  nopeText: {
-    borderWidth: 2,
-    borderColor: 'red',
-    color: 'red',
-    fontSize: 32,
-    fontWeight: '900',
-    padding: 10,
-    paddingHorizontal: 30,
-    letterSpacing: 2
-  }
-});

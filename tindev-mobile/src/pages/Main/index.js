@@ -3,20 +3,20 @@ import io from 'socket.io-client';
 import {
   SafeAreaView,
   Image,
-  StyleSheet,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Card from '../components/Card';
 
-import api from '../services/api';
+import Card from '../../components/Card';
+import styles from './styles';
+import api from '../../services/api';
 
-import logo from '../assets/logo.png';
-import like from '../assets/like.png';
-import dislike from '../assets/dislike.png';
-import itsamatch from '../assets/itsamatch.png';
+import logo from '../../assets/logo.png';
+import like from '../../assets/like.png';
+import dislike from '../../assets/dislike.png';
+import itsamatch from '../../assets/itsamatch.png';
 
 export default function Main({ navigation }) {
   const id = navigation.getParam('user');
@@ -26,8 +26,8 @@ export default function Main({ navigation }) {
 
   useEffect(() => {
     async function loadUsers() {
-      const res = await api.get('/devs', {
-        headers: { user_id: id }
+      const res = await api.get('/api/devs', {
+        headers: { user_id: id },
       });
       setUsers(res.data);
     }
@@ -35,8 +35,8 @@ export default function Main({ navigation }) {
   }, [id]);
 
   useEffect(() => {
-    const socket = io('http://localhost:3001', {
-      query: { user: id }
+    const socket = io('http://192.168.0.16:3333', {
+      query: { user: id },
     });
 
     socket.on('match', dev => {
@@ -47,16 +47,16 @@ export default function Main({ navigation }) {
   const handleLike = async () => {
     const [user, ...rest] = users;
 
-    await api.post(`/devs/${user._id}/likes`, null, {
-      headers: { user_id: id }
+    await api.post(`/api/devs/${user._id}/likes`, null, {
+      headers: { user_id: id },
     });
     setUsers(rest);
   };
   const handleDislike = async () => {
     const [user, ...rest] = users;
 
-    await api.post(`/devs/${user._id}/dislikes`, null, {
-      headers: { user_id: id }
+    await api.post(`/api/devs/${user._id}/dislikes`, null, {
+      headers: { user_id: id },
     });
     setUsers(rest);
   };
@@ -118,79 +118,3 @@ export default function Main({ navigation }) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f4f4f4',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  logo: {
-    marginTop: 30
-  },
-  cardsContainer: {
-    flex: 1,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    maxHeight: 500
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    marginBottom: 60
-  },
-  button: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    elevation: 2
-  },
-  empty: {
-    alignSelf: 'center',
-    color: '#999',
-    fontSize: 24,
-    fontWeight: 'bold'
-  },
-  matchContainer: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,.8)',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  matchAvatar: {
-    width: 160,
-    height: 160,
-    borderRadius: 80,
-    borderWidth: 5,
-    borderColor: '#fff',
-    marginVertical: 30
-  },
-  matchName: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#fff'
-  },
-  matchImage: {
-    height: 60,
-    resizeMode: 'contain'
-  },
-  matchBio: {
-    marginTop: 10,
-    fontSize: 16,
-    color: 'rgba(255,255,255,.8)',
-    lineHeight: 24,
-    textAlign: 'center',
-    paddingHorizontal: 30
-  },
-  closeMatch: {
-    fontSize: 16,
-    color: 'rgba(255,255,255,.8)',
-    textAlign: 'center',
-    marginTop: 30,
-    fontWeight: 'bold'
-  }
-});
