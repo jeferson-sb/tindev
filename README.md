@@ -3,9 +3,11 @@
 <img src=".github/logo.png">
 <br />
 
-![](https://img.shields.io/badge/omnistack-8.0-blueviolet?style=flat-square)
+![](https://img.shields.io/badge/omnistack-8.0-blueviolet?style=flat-square) ![alt release](https://img.shields.io/github/v/release/jeferson-sb/tindev?style=flat-square)
 
 </div>
+
+![alt Mockup project](.github/mockup.png)
 
 ## 💡 Project
 
