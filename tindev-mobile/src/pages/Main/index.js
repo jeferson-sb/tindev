@@ -18,8 +18,8 @@ import like from '../../assets/like.png';
 import dislike from '../../assets/dislike.png';
 import itsamatch from '../../assets/itsamatch.png';
 
-export default function Main({ navigation }) {
-  const id = navigation.getParam('user');
+export default function Main({ navigation, route }) {
+  const id = route.params.user;
   const [users, setUsers] = useState([]);
   const [matchDev, setMatchDev] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -35,7 +35,7 @@ export default function Main({ navigation }) {
   }, [id]);
 
   useEffect(() => {
-    const socket = io('http://192.168.0.16:3333', {
+    const socket = io('http://192.168.0.10:3333', {
       query: { user: id },
     });
 
