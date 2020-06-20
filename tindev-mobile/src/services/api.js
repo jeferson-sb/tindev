@@ -1,11 +1,7 @@
 import axios from 'axios';
+import { API_URL } from 'react-native-dotenv';
 
-let apiURL;
-if (process.env.NODE_ENV === 'development') {
-  apiURL = 'http://192.168.0.10:3333';
-} else if (process.env.NODE_ENV === 'production') {
-  apiURL = 'https://tindev.herokuapp.com';
-}
+let apiURL = API_URL;
 
 const api = axios.create({
   baseURL: apiURL,

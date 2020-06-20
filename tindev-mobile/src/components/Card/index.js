@@ -29,22 +29,28 @@ export default function Card({
       PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,
         onPanResponderMove(evt, gestureState) {
+          console.log('Starting to slide...');
           position.setValue({ x: gestureState.dx, y: gestureState.dy });
         },
         onPanResponderRelease: (evt, gestureState) => {
           if (gestureState.dx > 120) {
             Animated.spring(position, {
               toValue: { x: SCREEN_WIDTH + 100, y: gestureState.dy },
+              useNativeDriver: true,
             }).start(() => {
-              setCurrentIndex(currentIndex + 1);
+              console.log('Sliding right...');
               handleLike();
               position.setValue({ x: 0, y: 0 });
             });
           } else if (gestureState.dx < -120) {
             Animated.spring(position, {
-              toValue: { x: -SCREEN_WIDTH - 100, y: gestureState.dy },
+              toValue: {
+                x: -SCREEN_WIDTH - 100,
+                y: gestureState.dy,
+              },
+              useNativeDriver: true,
             }).start(() => {
-              setCurrentIndex(currentIndex + 1);
+              console.log('Sliding left...');
               handleDislike();
               position.setValue({ x: 0, y: 0 });
             });
@@ -52,11 +58,12 @@ export default function Card({
             Animated.spring(position, {
               toValue: { x: 0, y: 0 },
               friction: 4,
+              useNativeDriver: true,
             }).start();
           }
         },
       }),
-    [currentIndex, handleLike, handleDislike, position, setCurrentIndex],
+    [handleLike, handleDislike, position],
   );
   const rotate = position.x.interpolate({
     inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
@@ -82,9 +89,9 @@ export default function Card({
     extrapolate: 'clamp',
   });
 
-  if (parseInt(i) < parseInt(currentIndex)) {
+  if (parseInt(i, 10) < parseInt(currentIndex, 10)) {
     return null;
-  } else if (parseInt(i) === parseInt(currentIndex)) {
+  } else if (parseInt(i, 10) === parseInt(currentIndex, 10)) {
     return (
       <Animated.View
         {...panResponder.panHandlers}
