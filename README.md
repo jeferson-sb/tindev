@@ -11,7 +11,9 @@
 
 ![alt Mockup project](.github/mockup.png)
 
-![alt Mockup demo](.github/demo.gif)
+<p align="center">
+  <img src=".github/demo.gif" />
+</p>
 
 ## 💡 Project
 
