@@ -4,19 +4,20 @@
   "private": true,
   "dependencies": {
     "axios": "^0.26.1",
-    "eslint-plugin-react": "^7.23.2",
     "prop-types": "^15.8.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^4.0.3",
-    "socket.io-client": "^3.1.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "^5.0.0",
+    "socket.io-client": "^4.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint:js": "eslint . --ext .js",
+    "prettier": "prettier 'src/**/*.js' -w",
     "postbuild": "mv build ../tindev-backend/public"
   },
   "eslintConfig": {
@@ -33,5 +34,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }
