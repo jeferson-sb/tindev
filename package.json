@@ -1,0 +1,15 @@
+{
+  "name": "tindev",
+  "version": "1.0.0",
+  "main": "main.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "web:dev": "pnpm -F './packages/webapp' dev",
+    "server:dev": "pnpm -F './packages/server' dev",
+    "cp-dev": "./scripts/cp-dev.sh"
+  },
+  "author": "Jeferson Brito",
+  "license": "MIT"
+}

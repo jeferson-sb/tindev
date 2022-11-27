@@ -19,19 +19,15 @@
 
 Tindev as the name suggests it is a Tinder-like for Developers, a fullstack web and mobile application built using top technologies like **React**, as the front-end, **Node.js**, back-end with MongoDB, and **React-native** for our mobile app.
 
-## 💻 Demo
+## 💻 Web Demo
 
-[https://tindev-app.herokuapp.com](https://tindev-app.herokuapp.com/)
-
-### 📱 App
-
-[Download para Android](https://github.com/jeferson-sb/tindev/releases/tag/1.0.0)
+[https://tindev-new.netlify.app](https://tindev-new.netlify.app)
 
 ## 🚀 Quick start
 
 ### Pre-requisites
 
-- Node.js version 10.0 or greater
+- Node.js >=18
 - Download & Install [MongoDB](https://www.mongodb.com/download-center)
 - Download & Install [Mongo Compass](https://www.mongodb.com/products/compass)
 - React Native: [See the environtment setup to react native](https://reactnative.dev/docs/environment-setup)
@@ -39,43 +35,36 @@ Tindev as the name suggests it is a Tinder-like for Developers, a fullstack web 
 ### Installation
 
 ```bash
-$ cd tindev-backend
-$ yarn
+$ npm install -g pnpm
+$ pnpm install
 ```
 
-```bash
-$ cd .. && cd tindev-frontend
-$ yarn
+Prepare environment variables
 ```
-
-```bash
-$ cd .. && cd tindev-mobile
-$ yarn
+$ chmod +x ./scripts/*.sh 
+$ pnpm cp-dev 
 ```
 
 ### Usage
 
-> Rename `.env.example` to `.env` on backend
+Run the server at localhost:8080
 
 ```bash
-$ cd tindev-backend
-$ yarn dev
+$ pnpm server:dev
 ```
 
-> Open another terminal and run
+Run the client at localhost:5173
 
 ```bash
-$ cd tindev-frontend
-$ yarn start
+$ pnpm web:dev
 ```
 
 ## ✔ To-Do
 
-- [x] Release app 1.0.0
-- [x] Slide right and Slide left feature
+- [ ] Update mobile app
 
 ## 📝 License
 
 This project is licensed under the terms of the [MIT](https://github.com/jeferson-sb/tindev/blob/master/LICENSE) license
 
-`Made with ♥ by Jeferson © 2020`
+`Made and maintained with ♥ by Jeferson since © 2020`
