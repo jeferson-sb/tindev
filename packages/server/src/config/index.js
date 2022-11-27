@@ -1,6 +1,8 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import path from 'path';
 
-const envFile = dotenv.config({ path: '../.env' });
+const root = process.cwd();
+const envFile = dotenv.config({ path: path.join(root, 'src/.env') });
 
 if (!envFile || envFile.error) {
   throw new Error("Couldn't find .env file");
@@ -11,6 +13,6 @@ const config = {
   databaseUrl: process.env.DATABASE_URI,
   mode: process.env.NODE_ENV,
   host: process.env.HOST,
-}
-
-export default config  
+  client: process.env.CLIENT_URL
+};
+export default config;
